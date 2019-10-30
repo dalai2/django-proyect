@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+{% block content %}
+{% load embed_video_tags %}
+	<article class="media content-section">
+		<img class='rounded-circle article-img' src="{{ object.author.profile.image.url }}" alt="">
+	  <div class="media-body">
+	    <div class="article-metadata">
+	      <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+		  <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+		  <small class="text-muted">Calificación del usuario: 5/7 </small>
+		{% if object.author == user %}
+		<a class='btn btn-secondary btn-sm mt-1 mb-1' href="{% url 'post-update' object.id %}">Actualizar</a>
+		<a class='btn btn-danger btn-sm mt-1 mb-1' href="{% url 'post-delete' object.id %}">Borrar</a>
+		{% endif %}
+		</div>
+		<h2 class="article-title">{{ object.title }}</h2>
+		<p class="article-content">{{ object.content }}</p>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/velPquCnw7k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	  </div>
+	  
+	</article>
+	<small class="text-muted">¿Te parecio útil este articulo?   </small>
+	<a href="#"> <i class="fas fa-thumbs-up mx-2"></i> </a>
+	<a href="#"> <i class="fas fa-thumbs-down"></i> </a>
+	<br>
+	<small class="text-muted">A 10 personas les parecio útil este articulo</small>
+{% endblock content %}
